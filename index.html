@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para mis novenas💖</title>
 
 <style>
@@ -14,17 +14,14 @@ body {
   align-items: center;
   height: 100vh;
   font-family: 'Georgia', serif;
-  color: black;
   overflow: hidden;
 }
 
-/* CONTENEDOR */
 .container {
   perspective: 1200px;
   text-align: center;
 }
 
-/* LIBRO */
 .book {
   width: 220px;
   height: 300px;
@@ -32,7 +29,7 @@ body {
   transform-style: preserve-3d;
   transition: transform 1.5s cubic-bezier(.77,0,.18,1);
   cursor: pointer;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  /*box-shadow: 0 15px 40px rgba(0,0,0,0.25);*/
 }
 
 .book:hover {
@@ -48,7 +45,10 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url("https://www.kindpng.com/picc/m/170-1707267_book-front-cover-png-transparent-png.png") center/contain no-repeat;
+  background-image: url("https://i.pinimg.com/236x/35/55/44/355544112225694106d2ab9a8f8d93b9.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 5px;
   backface-visibility: hidden;
 }
@@ -58,7 +58,6 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#fff, #ffe4ec);
   transform: rotateY(180deg);
   border-radius: 5px;
   display: flex;
@@ -71,20 +70,41 @@ body {
   opacity: 0;
   transition: opacity 1.5s;
   text-align: center;
-  color: #333;
-}
-
-.message img {
-  width: 130px;
-  margin-bottom: 10px;
-  animation: flor 1.2s ease-out;
 }
 
 .message.show {
   opacity: 1;
 }
 
-/* ANIMACIÓN FLOR */
+.message img {
+  width: 120px;
+  margin-bottom: 10px;
+  animation: flor 1.2s ease-out;
+}
+
+.heart {
+  position: fixed; /* IMPORTANTE */
+  bottom: -20px;
+  font-size: 20px;
+  pointer-events: none;
+  animation: float 6s linear forwards;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+/* ANIMACIÓN */
 @keyframes flor {
   0% {
     opacity: 0;
@@ -96,16 +116,8 @@ body {
   }
 }
 
-/* TEXTO */
 h2 {
-  font-size: 22px;
   color: #7a4e8a;
-  font-weight: normal;
-}
-
-p {
-  margin-top: 20px;
-  color: #5e3a70;
 }
 </style>
 
@@ -116,15 +128,15 @@ p {
 <div class="container">
 
   <div class="book" id="book">
+    
     <div class="cover"></div>
 
-<div class="inside">
-  <div class="message" id="message">
-    <img src="https://png.pngtree.com/png-vector/20240312/ourmid/pngtree-realistic-red-rose-white-background-png-image_11716749.png">
-    <h2>Feliz día mis amores</h2>
-  </div>
-</div>
-```
+    <div class="inside">
+      <div class="message" id="message">
+        <img src="https://png.pngtree.com/png-vector/20240312/ourmid/pngtree-realistic-red-rose-white-background-png-image_11716749.png">
+        <h2>Feliz día mis amores</h2>
+      </div>
+    </div>
 
   </div>
 
@@ -142,7 +154,23 @@ book.addEventListener("click", () => {
   setTimeout(() => {
     message.classList.add("show");
   }, 800);
+
+  createHearts();
 });
+
+/* CORAZONES */
+function createHearts() {
+  for (let i = 0; i < 15; i++) {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }
+}
 </script>
 
 </body>
